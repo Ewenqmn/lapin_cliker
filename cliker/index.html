@@ -16,7 +16,9 @@
     <!-- FONT -->
 </head>
 
-<body>
+<body background="image/plaine.png">
+
+    
     <!-- Mettre le contenu ici -->
     <div id = "name"></div>
 
@@ -26,16 +28,19 @@
             <img id="lapin" src="image/lapintwerkdroit.png" alt="lapintwerk">
         </div>
 
-        <div>
+        <div id="score">
+            <p>Score :<span id="jeu">0</span><i id="un" class="fa-solid fa-carrot"></i></p>
+        </div>
 
-            <p>Score :<span id="jeu">0</span><i class="fa-solid fa-carrot"></i></p>
-            
+        <div id="boutons">
             <button id="carotte"><i class="fa-solid fa-carrot"></i> &nbsp;x2 = <span id="grossisseur">50</span> carottes </button>
             <button id="auto"><i class="fa-solid fa-clock"></i> &nbsp;<span id="multiplicateur">1</span> carottes par seconde = <span id="automatiseur">10000</span> carottes </button>
-
+            <button id="save" onclick="save()"> sauvegarder </button>
+            <button id="load" onclick="load()"> charger la sauvegarde </button>
+            <button id="supprimer" onclick="supprimer()"> supprimer la sauvegarde </button>
         </div>
-        
-        <div id="pop">mange plus de carottes tu seras aimable</div>
+
+        <!-- <div id="pop">mange plus de carottes tu seras aimable</div> -->
         
     </section>
 

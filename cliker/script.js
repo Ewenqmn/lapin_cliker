@@ -1,17 +1,16 @@
 var score = 0;
 var nb_carotte_par_click = 1
-var click = 2
 var prix_prochain_grossisseur_carotte = 50
 var prix_prochain_automatiseur_carottes = 10000
 var multiplicateur = 1
 
-window.onload = function () {
-    var name = prompt("What is your name");
+// window.onload = function () {
+//     var name = prompt("What is your name");
     
-    var space = document.getElementById("name");
+//     var space = document.getElementById("name");
     
-    space.innerHTML = "cookie de " + name;
-}
+//     space.innerHTML = "cookie de " + name;
+// }
 
 
 
@@ -36,9 +35,10 @@ function actualisation_grossisseur(){
 function actualisation_automatiseur(){
     document.querySelector("#automatiseur").innerHTML = prix_prochain_automatiseur_carottes
 }
-function actualisation_multiplicateur(){
-    document.querySelector("#multiplicateur").innerHTML = multiplicateur
-} 
+// function actualisation_multiplicateur(){
+//     document.querySelector("#multiplicateur").innerHTML = multiplicateur
+// } 
+
 
 
 /******* Actualisation du HTML  *******/
@@ -47,14 +47,18 @@ function actualisation_multiplicateur(){
 
 document.querySelector('#lapin').addEventListener('click', click_lapin)
 
-function click_lapin(){
+function click_lapin(){const audioElement = new Audio('son/fouet.mp3');
     // Fonction qui s execute sur un click lapin
     // Incrémente le nombre de carottes disponibles
     score = score + nb_carotte_par_click
     actualisation_nb_carottes()
+    tombe_carottes()
+    audioElement.play()
 }
 
 document.querySelector('#carotte').addEventListener('click', acheterDesPlusGrossesCarottes)
+const double = new Audio('son/ding.mp3');
+const notime = new Audio ('son/point.mp3')
 
 function acheterDesPlusGrossesCarottes() {
     if(score >= prix_prochain_grossisseur_carotte){
@@ -63,13 +67,17 @@ function acheterDesPlusGrossesCarottes() {
         prix_prochain_grossisseur_carotte *= 2
         actualisation_grossisseur()
         actualisation_nb_carottes()
+        double.play()
     }
     else{
+        notime.play()
         alert("Revient avec plus de Carottes")
     }
 
 }
 
+
+const time = new Audio('son/content.mp3');
 document.querySelector('#auto').addEventListener('click', automatisationCarottes)
 
 function automatisationCarottes() {
@@ -79,46 +87,63 @@ function automatisationCarottes() {
         prix_prochain_automatiseur_carottes *= 2
         actualisation_automatiseur()
         actualisation_nb_carottes()
-        actualisation_multiplicateur()
+        // actualisation_multiplicateur()
+        time.play()
     }
     else{
+        notime.play()
         alert("Revient avec plus de Carottes")
     }
 }
 
-
-const audioElement = new Audio('son/fouet.mp3');
-document.querySelector('#lapin').addEventListener('click',audio);
-function audio(){
-    audioElement.play()
-}
-
-
-const time = new Audio('son/content.mp3');
-const notime = new Audio ('son/point.mp3')
-document.querySelector('#auto').addEventListener('click',multi);
-function multi(){
-    if(score >= prix_prochain_automatiseur_carottes){
-        score =  score - prix_prochain_automatiseur_carottes;
-    time.play()
-}
-else{
-    notime.play()
-}
-}
-
-
-const double = new Audio('son/ding.mp3');
-document.querySelector('#carotte').addEventListener('click',grossisseur);
-function grossisseur(){
-    if(score >= prix_prochain_grossisseur_carotte){
-        score =  score - prix_prochain_grossisseur_carotte;
-        nb_carotte_par_click = nb_carotte_par_click*2
-        double.play()
+function save() {
+    const sauvegarde = {score: score,
+        prix_prochain_grossisseur_carottes: prix_prochain_grossisseur_carotte, 
+        prix_prochain_automatiseur_carottes: prix_prochain_automatiseur_carottes,
+        
     }
-    else{
-        notime.play()
-    }
-   
+    localStorage.setItem("sauvegarde", JSON.stringify(sauvegarde));
+}
+  
+function load() {
+  
+    let sauvegarde = localStorage.getItem("sauvegarde");
+    sauvegarde = JSON.parse(sauvegarde)
+    score = sauvegarde.score;
+    prix_prochain_grossisseur_carotte = sauvegarde.prix_prochain_grossisseur_carottes;
+    prix_prochain_automatiseur_carottes = sauvegarde.prix_prochain_automatiseur_carottes;
+
+    actualisation_nb_carottes()
+    actualisation_grossisseur()
+    actualisation_automatiseur()
+
+}
+  
+function supprimer() {
+     localStorage.clear("sauvegarde");
 }
 
+
+function tombe_carottes(){
+    const element = document.createElement('img');
+    element.src = './image/carotte volante.png'
+    element.className = 'carottevolante'
+    element.style.left = 350+ 'px';
+    element.style.top = -200 + 'px';
+    document.querySelector('body').appendChild(element)
+}
+
+
+
+var message_interval= setInterval(message_aleatoire, 120000) 
+var message = ["Mange plus de carottes tu seras aimable.", "Fait gaffe t'as les fesses roses.", "ALLEZ FOUETTE LE !!", "Clique tu pers 1,42 calories.", "Lapin la pine."]
+
+function message_aleatoire() {
+
+  var random = [Math.floor(Math.random()*message.length)];
+
+  var message_random = message[random];
+
+  alert(message_random)
+
+}

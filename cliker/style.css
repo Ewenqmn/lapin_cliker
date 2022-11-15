@@ -1,22 +1,80 @@
-/* ==MISE EN PAGE GENERAL== */
 .flex-container {
-    display: flex;
-    justify-content: space-around;
+  display: flex;
+  justify-content: space-around;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-size: cover;
+}
+body #lapin:hover {
+  cursor: pointer;
+}
+
+img {
+  width: 33%;
+  margin-top: 100px;
+}
+
+#score {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#boutons button {
+  cursor: pointer;
+  border-radius: 20px;
+  border-width: 5px;
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+  border-color: rgb(255, 119, 0);
+}
+#boutons #carotte {
+  font-size: 20px;
+  font-weight: bold;
+  height: 40px;
+}
+#boutons #auto {
+  font-size: 20px;
+  font-weight: bold;
+  height: 40px;
+}
+
+#score {
+  color: rgb(255, 255, 255);
+}
+
+#un {
+  color: rgb(255, 119, 0);
+}
+
+.carottevolante {
+  position: absolute;
+  -webkit-animation: pluie 3s linear 0s normal;
+          animation: pluie 3s linear 0s normal;
+  width: 64px;
+}
+
+@-webkit-keyframes pluie {
+  from {
+    transform: translateY(-100%);
   }
-  
-  .container {
-    width: 80%;
-    margin: 0 auto;
+  to {
+    transform: translateY(150vh);
   }
-  
-  body {
-    margin: 0;
-    padding: 0;
+}
+
+@keyframes pluie {
+  from {
+    transform: translateY(-100%);
   }
-  
-  img {
-        width: 33%;
-        margin-top: 100px;
+  to {
+    transform: translateY(150vh);
   }
-  
-  
+}/*# sourceMappingURL=style.css.map */
