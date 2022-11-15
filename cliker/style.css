@@ -1,0 +1,22 @@
+/* ==MISE EN PAGE GENERAL== */
+.flex-container {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .container {
+    width: 80%;
+    margin: 0 auto;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+  }
+  
+  img {
+        width: 33%;
+        margin-top: 100px;
+  }
+  
+  
